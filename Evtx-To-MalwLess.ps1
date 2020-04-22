@@ -35,7 +35,7 @@ function New-Payload{
    $Payload = @{};
 
    $EventData.ChildNodes | ForEach-Object {
-      $Payload = $Payload + @{$Node.Name = $Node.InnerText} 
+      $Payload = $Payload + @{$_.Name = $_.InnerText} 
    }
 
    return $Payload
@@ -109,6 +109,6 @@ Write-Host "[*] Reading from $EventFile"
 
 $Events = Get-WinEvent -Path $EventFile
 
-[System.Uri]::UnescapeDataString((Get-MalwLessConfig ($Events))) | Out-File -FilePath $OutputFile -Encoding utf8
+(Get-MalwLessConfig ($Events)) | Out-File -FilePath $OutputFile -Encoding utf8
 
 Write-Host "[*] MalwLess file written to $OutputFile"
