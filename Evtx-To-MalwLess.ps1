@@ -35,12 +35,7 @@ function New-Payload{
    $Payload = @{};
 
    $EventData.ChildNodes | ForEach-Object {
-      $Node = $_
-     
-         $Payload = $Payload + @{$Node.Name = $Node.InnerText} 
-      
-    
-      
+      $Payload = $Payload + @{$Node.Name = $Node.InnerText} 
    }
 
    return $Payload
