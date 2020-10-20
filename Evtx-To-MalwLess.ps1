@@ -1,4 +1,4 @@
-param (
+﻿param (
    [Parameter(Mandatory=$true)] [string] $EventFile,
    [Parameter(Mandatory=$true)] [string] $OutputFile = "MalwLess_rules.json"
  )
@@ -93,8 +93,8 @@ function Get-MalwLessConfig {
 
    $Rules = @{};
 
-   $Events | ForEach-Object {
-      $Rules = $Rules + (Get-MalwLessRule $_)
+   for($i = $Events.Count -1; $i -ge 0; $i--){
+      $Rules = $Rules + (Get-MalwLessRule $Events[$i])
    }
 
    return @{
