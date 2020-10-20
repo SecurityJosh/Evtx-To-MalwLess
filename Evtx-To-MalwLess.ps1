@@ -84,14 +84,14 @@ function Get-MalwLessConfig {
    
    $Events = $Events | Where-Object {$_.ProviderName -eq "Microsoft-Windows-Sysmon" -or ($_.ProviderName -eq "Microsoft-Windows-Powershell" -and ($_.Id -eq "4103" -or $_.Id -eq "4104"))} 
 
-   Write-Host "[*] .Evtx file contians $($Events.Count) supported events"
+   Write-Host "[*] .Evtx file contains $($Events.Count) supported events"
 
    if($Events.Count -eq 0){
       Write-Host "[!] Error - No supported events found"
       return
    }
 
-   $Rules = @{};
+   $Rules = [ordered] @{};
 
    for($i = $Events.Count -1; $i -ge 0; $i--){
       $Rules = $Rules + (Get-MalwLessRule $Events[$i])
